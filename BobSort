@@ -1,0 +1,48 @@
+/**
+ * Demonstrates Bob Sort on an array of integers.
+ * This code is available for public use. Please give credit where it is due.
+ *
+ * @Yahvin Gali
+ * @6/8/2021
+ */
+ 
+public class BobSort {
+    private DynamicArrayChart chart;
+    
+    private BobSort () {
+        /* Create an array of integers named array with 1-20 elements. 
+         * Element values must be from 1-50. */
+        int[] arr = new int[20];
+        for (int i = 0; i<arr.length;i++){
+            arr[i] = (int)Math.floor(Math.random()*50 + 1);
+        }
+        
+        /* Create a new DynamicArrayChart and assign it to variable chart. */
+        chart = new DynamicArrayChart("Bob Sort", arr, false, 200);
+        
+        /* Set array to null. */
+        arr = null;
+        
+        /* Call the runSort() method. */
+        runSort();
+    }
+    
+    private void runSort() {
+        /* Implement the Bob Sort algorithm.
+         * All queries and modifications to the original array can be done with
+         * method calls on the chart object. */
+        int swapCount = 0;
+        for (int i = 1; i < chart.getArrayLength(); i++){
+            if (chart.getValueForSwap1(i) < chart.getValueForSwap2(i-1)){
+                chart.swap(i,i-1);
+                swapCount++;
+            }
+        }
+        if (swapCount != 0) runSort();
+        chart.setDone();
+    }
+    
+    public static void main(String[] args) {
+        new BobSort();
+    }
+}
