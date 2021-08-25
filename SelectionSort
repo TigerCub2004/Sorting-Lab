@@ -1,0 +1,50 @@
+/**
+ * Demonstrates Selection Sort on an array of integers.
+ * This code is available for public use. Please give credit where it is due.
+ *
+ * @Yahvin Gali
+ * @4/10/2021
+ */
+public class SelectionSort {
+    private DynamicArrayChart chart;
+    public SelectionSort() {
+        /* Create an array of integers named array with 1-20 elements. 
+         * Element values must be from 1-50. */
+        int[] arr = new int[20];
+        for (int i = 0; i<arr.length;i++){
+            arr[i] = (int)Math.floor(Math.random()*50 + 1);
+        }
+        /* Create a new DynamicArrayChart and assign it to variable chart. */
+        chart = new DynamicArrayChart("Selection Sort", arr, false, 800);
+     
+        /* Set array to null. */
+        arr = null;
+     
+        /* Call the runSort() method. */
+        runSort();
+    }
+    
+    private void runSort() {
+        /* Implement the Selection Sort algorithm.
+         * All queries and modifications to the original array can be done with
+         * method calls on the chart object. */
+        for (int i=0; i< chart.getArrayLength()-1; i++){
+            int min = i;
+            chart.markAsMin(i);
+            for (int j = i+1; j<chart.getArrayLength(); j++){
+                if (chart.getValueForSwap1(j) < chart.getValueForSwap2(min)) {
+                    min=j;
+                    chart.markAsMin(j);
+                }
+            }
+            if (min != i){
+                chart.swap(i, min);
+            }
+        }
+        chart.setDone();
+    }
+    
+    public static void main(String[] args) {
+        new SelectionSort();
+    }
+}
